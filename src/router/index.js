@@ -56,6 +56,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/gathering',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Gathering',
+        component: () => import('@/views/gathering/index'),
+        meta: { title: '活动信息管理', icon: 'form' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

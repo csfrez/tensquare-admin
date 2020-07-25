@@ -31,12 +31,26 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: port,
-    open: true,
+    open: false,
+    proxy: {
+      '/dev-api': {
+        // 本地服务接口地址
+        target: 'http://127.0.0.1:10020',
+        // 远程演示服务地址,可用于直接启动项目
+        // target: 'https://saber.bladex.vip/api',
+        // ws: true,
+        secure: false, // https协议才设置
+        changeOrigin: true,
+        pathRewrite: {
+          '^/dev-api': '/'
+        }
+      }
+    },
     overlay: {
       warnings: false,
       errors: true
-    },
-    before: require('./mock/mock-server.js')
+    }
+    // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
